@@ -1,0 +1,26 @@
+{
+    "name": "kitten",
+    "displayName": "kitten",
+    "description": "Adds support for the yarn dialogue language",
+    "version": "0.0.1",
+    "publisher": "codeimpossible",
+    "engines": {
+        "vscode": "^1.24.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "yarn",
+            "aliases": ["Yarn Dialogue", "yarn"],
+            "extensions": [".yarn",".yarn.txt"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "yarn",
+            "scopeName": "source.yarn",
+            "path": "./syntaxes/yarn.tmLanguage"
+        }]
+    }
+}
