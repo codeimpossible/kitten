@@ -35,9 +35,31 @@
 			<key>include</key>
 			<string>#interpolation</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#html</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>html</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>&lt;(\w+)&gt;</string>
+					<key>name</key>
+					<string>punctuation.definition.html.tag.yarn</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>&lt;\s*\/?(\w+)\s*\/?&gt;</string>
+					<key>name</key>
+					<string>punctuation.definition.html.tag.yarn</string>
+				</dict>
+			</array>
+		</dict>
 		<key>node-title</key>
 		<dict>
 			<key>patterns</key>
@@ -109,6 +131,18 @@
 				</dict>
 			</array>
 		</dict>
+		<key>string</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>"(.*?)"</string>
+					<key>name</key>
+					<string>punctuation.definition.string.yarn</string>
+				</dict>
+			</array>
+		</dict>
 		<key>function-call</key>
 		<dict>
 			<key>patterns</key>
@@ -127,6 +161,21 @@
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.arguments.yarn</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#string</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#variable</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#keyword</string>
+								</dict>
+							</array>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -147,18 +196,20 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
+					<key>begin</key>
 					<string>^&lt;&lt;</string>
-					<key>name</key>
-					<string>keyword.operator.commandstart.yarn</string>
-				</dict>
-				<dict>
-					<key>match</key>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.command.yarn</string>
+						</dict>
+					</dict>
+					<key>end</key>
 					<string>&gt;&gt;$</string>
 					<key>name</key>
-					<string>keyword.operator.commandend.yarn</string>
-				</dict>
-				<dict>
+					<string>punctuation.definition.command.terminator.yarn</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -172,6 +223,10 @@
 						<dict>
 							<key>include</key>
 							<string>#keyword</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string</string>
 						</dict>
 					</array>
 				</dict>
@@ -211,7 +266,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(?:if|is|false|true|else|elseif|endif)</string>
+					<string>(?:if|is|set|false|true|else|elseif|endif)</string>
 					<key>name</key>
 					<string>keyword.control.yarn</string>
 				</dict>
@@ -222,49 +277,10 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.variable.yarn</string>
-						</dict>
-					</dict>
 					<key>match</key>
-					<string>(\$)[a-zA-Z_][a-zA-Z0-9_]*</string>
+					<string>(\$)([a-zA-Z_][a-zA-Z0-9_])*</string>
 					<key>name</key>
 					<string>variable.other.normal.yarn</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\$\{</string>
-					<key>captures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.variable.yarn</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\}</string>
-					<key>name</key>
-					<string>variable.other.bracket.yarn</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#string</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#variable</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#interpolation</string>
-						</dict>
-					</array>
 				</dict>
 			</array>
 		</dict>
